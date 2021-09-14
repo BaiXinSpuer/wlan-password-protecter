@@ -13,6 +13,7 @@ time.sleep(0.1)
 print('正在进行加密')
 start_time=time.time()
 b=''
+last_bfb=0
 n=0
 for i in range(num):
     try:
@@ -23,7 +24,10 @@ for i in range(num):
             n=0
         else:
             n+=1
-        print(f'已完成{i+1}次加密')
+        bfb=int(i/num*100)
+        if bfb!=last_bfb:
+            print(f'当前加密进度为：{bfb}%')
+        last_bfb=int(i/num*100)
     except:
         print(n,num)
         break
@@ -32,6 +36,7 @@ b=str(b).encode(encoding='utf_8')
 b=hashlib.sha256(b).hexdigest()[0:-1]
 def dd():
     global n,b
+    last_bfb=0
     x=input('加密已完成\nA:加倍加密 B:得出结果\n')
     if x=='B' or x=='b':
         mb=f'=====================================================================\n{b}\n====================================================================='
@@ -52,7 +57,10 @@ def dd():
                 n=0
             else:
                 n+=1
-            print(f'已完成{i+1}次翻倍加密')
+            bfb=int(i/num*100)
+            if bfb!=last_bfb:
+                print(f'当前翻倍加密进度为：{bfb}%')
+            last_bfb=int(i/num*100)
         time.sleep(0.1)
         print('统计中...')
         time.sleep(0.3)
